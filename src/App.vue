@@ -1,10 +1,9 @@
-<script setup lang="ts">
-import Header from "@/components/Header.vue";
-</script>
-
 <template>
-  <Header>
+  <AppShell>
     <template #header> Hello </template>
     <router-view></router-view>
-  </Header>
+  </AppShell>
 </template>
+<script setup lang="ts">
+import AppShell from "@/components/AppShell.vue";
+</script>

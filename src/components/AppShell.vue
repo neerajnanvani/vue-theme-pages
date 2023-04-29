@@ -6,7 +6,9 @@
         class="bg-gray-500 border-b border-gray-300 border-opacity-25 lg:border-none"
         v-slot="{ open }"
       >
-        <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
+        <div
+          class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 fixed left-0 top-0 z-20 w-full bg-gray-300"
+        >
           <div
             class="relative h-16 flex items-center justify-between lg:border-b lg:border-gray-400 lg:border-opacity-25"
           >
@@ -23,7 +25,7 @@
                   <RouterLink
                     v-for="item in navigation"
                     :key="item.name"
-                    :to="{name: item.href}"
+                    :to="{ name: item.href }"
                     :class="[
                       item.current
                         ? 'bg-gray-700 text-white'
@@ -52,6 +54,7 @@
                     placeholder="Search"
                     type="search"
                     name="search"
+                    autocomplete="off"
                   />
                 </div>
               </div>
@@ -93,7 +96,7 @@
           </div>
         </DisclosurePanel>
       </Disclosure>
-      <header class="py-10">
+      <header class="py-10 mt-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 class="text-3xl font-bold text-white">
             <slot name="header"> Dashboard </slot>
@@ -102,8 +105,8 @@
       </header>
     </div>
 
-    <main class="-mt-32">
-      <div class="max-w-7xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">
+    <main class="w-full h-full">
+      <div class="mx-5">
         <slot> </slot>
       </div>
     </main>
@@ -116,7 +119,7 @@ import SearchIcon from "@heroicons/vue/24/solid/MagnifyingGlassIcon";
 import MenuIcon from "@heroicons/vue/24/outline/Bars3Icon";
 import XIcon from "@heroicons/vue/24/outline/XMarkIcon";
 import { ref } from "vue";
-import { RouterLink } from 'vue-router';
+import { RouterLink } from "vue-router";
 
 const navigation = ref([
   { name: "Dashboard", href: "Home", current: true },

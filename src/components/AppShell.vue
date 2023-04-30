@@ -1,9 +1,9 @@
 <template>
   <div class="min-h-full">
     <div class=" dark:bg-gray-800">
-      <Disclosure
+      <Popover
         as="nav"
-        class="bg-gray-500 dark:bg-gray-800 border-b border-gray-300 border-opacity-25 lg:border-none"
+        class="relative bg-gray-500 dark:bg-gray-800 border-b border-gray-300 border-opacity-25 lg:border-none"
         v-slot="{ open }"
       >
         <div
@@ -42,7 +42,7 @@
             <SearchHeader />
             <div class="flex lg:hidden">
               <!-- Mobile menu button -->
-              <DisclosureButton
+              <PopoverButton
                 class="bg-gray-600 p-2 rounded-md inline-flex items-center justify-center text-gray-200 hover:text-white hover:bg-gray-500 hover:bg-opacity-75 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-600 focus:ring-white"
               >
                 <span class="sr-only">Open main menu</span>
@@ -52,31 +52,30 @@
                   aria-hidden="true"
                 />
                 <XIcon v-else class="block h-6 w-6" aria-hidden="true" />
-              </DisclosureButton>
+              </PopoverButton>
             </div>
           </div>
         </div>
 
-        <DisclosurePanel class="lg:hidden mt-16">
-          <div class="px-2 pt-2 pb-3 space-y-1 ">
-            <DisclosureButton
-              v-for="item in navigation"
+        <PopoverPanel class="lg:hidden mt-16 absolute z-40 bg-gray-700 w-full">
+          <div class="px-2 pt-2 pb-3 space-y-1 w-full">
+            <RouterLink  v-for="item in navigation"
               :key="item.name"
-              as="a"
-              :href="item.href"
-              :class="[
+              class="w-full"
+              :to="{name: item.href}"             
+              >
+            <PopoverButton :class="[
                 currentRouteName === item.href
                   ? 'bg-gray-700 text-white'
                   : 'text-white hover:bg-gray-500 hover:bg-opacity-75',
-                'block rounded-md py-2 px-3 text-base font-medium',
-              ]"
-              :aria-current="currentRouteName === item.href ? 'page' : undefined"
-            >
+                'w-full block rounded-md py-2 px-3 text-base font-medium',
+              ]" >
               {{ item.name }}
-            </DisclosureButton>
+            </PopoverButton>
+          </RouterLink>
           </div>
-        </DisclosurePanel>
-      </Disclosure>
+        </PopoverPanel>
+      </Popover>
     </div>
 
     <main class="min-w-screen min-h-screen bg-white dark:bg-gray-900 pt-16">
@@ -88,7 +87,7 @@
 </template>
 
 <script setup lang="ts">
-import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
+import { Disclosure, DisclosureButton, DisclosurePanel, Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
 import MenuIcon from "@heroicons/vue/24/outline/Bars3Icon";
 import XIcon from "@heroicons/vue/24/outline/XMarkIcon";
 import SearchHeader from "@/components/SearchHeader.vue"

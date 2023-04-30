@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-full">
-    <div class="pb-16 dark:bg-gray-800">
+    <div class="mb-16 dark:bg-gray-800">
       <Disclosure
         as="nav"
         class="bg-gray-500 dark:bg-gray-800 border-b border-gray-300 border-opacity-25 lg:border-none"
@@ -99,7 +99,7 @@
       </Disclosure>
     </div>
 
-    <main class="w-full h-full bg-white dark:bg-gray-900">
+    <main class="min-w-screen min-h-screen bg-white dark:bg-gray-900">
       <div class="mx-5">
         <slot> </slot>
       </div>

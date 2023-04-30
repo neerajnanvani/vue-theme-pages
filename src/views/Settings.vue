@@ -1,11 +1,11 @@
 <template>
   <div class="w-full min-h-screen">
-    <h1 class="flex w-full text-xl text-gray-900 dark:text-gray-200 p-5 justify-center"> Customize Settings </h1>
+    <h1 class="flex w-full text-xl text-gray-900 dark:text-gray-200 p-5 justify-center">
+         Customize Settings 
+    </h1>
 
     <div class="flex mt-10 w-full space-x-10 justify-center">
-
-
-    <p>
+    <p class="text-black dark:text-white">
         Dark Mode   
     </p>
     <Switch

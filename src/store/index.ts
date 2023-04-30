@@ -1,8 +1,9 @@
 import { defineStore } from 'pinia'
 import {ref, computed} from "vue";
+import { sampleData } from '../assets/sampleData';
 
 export const useThemeStore = defineStore('theme', () => {
-    const darkMode = ref(true);
+    const darkMode = ref(false);
  
     const isDarkMode = computed(() => darkMode.value);
 
@@ -10,6 +11,10 @@ export const useThemeStore = defineStore('theme', () => {
     function setDarkMode(mode: boolean) {
       darkMode.value = mode;
     }
-  
-    return { isDarkMode, setDarkMode };
-  })
+    
+    function getSampleData() {
+        return sampleData;
+    }
+    return { isDarkMode, setDarkMode, getSampleData };
+
+})

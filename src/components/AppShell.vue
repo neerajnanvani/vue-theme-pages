@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-full">
-    <div class="mb-16 dark:bg-gray-800">
+    <div class=" dark:bg-gray-800">
       <Disclosure
         as="nav"
         class="bg-gray-500 dark:bg-gray-800 border-b border-gray-300 border-opacity-25 lg:border-none"
@@ -27,39 +27,19 @@
                     :key="item.name"
                     :to="{ name: item.href }"
                     :class="[
-                      item.current
+                      currentRouteName === item.href
                         ? 'bg-gray-700 dark:bg-gray-400 text-white'
                         : 'text-white hover:bg-gray-500 hover:bg-opacity-75',
                       'rounded-md py-2 px-3 text-sm font-medium',
                     ]"
-                    :aria-current="item.current ? 'page' : undefined"
+                    :aria-current="currentRouteName === item.name ? 'page' : undefined"
                   >
                     {{ item.name }}
                   </RouterLink>
                 </div>
               </div>
             </div>
-            <div class="flex-1 px-2 flex justify-center lg:ml-6 lg:justify-end">
-              <div class="max-w-lg w-full lg:max-w-xs">
-                <label for="search" class="sr-only">Search</label>
-                <div class="relative text-gray-400 dark:text-gray-300 focus-within:text-gray-600">
-                  <div
-                    class="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center"
-                  >
-                    <SearchIcon class="h-5 w-5" aria-hidden="true" />
-                  </div>
-                  <input
-                    id="search"
-                    class="block w-full bg-white dark:bg-gray-700 py-2 pl-10 pr-3 border border-transparent dark:border-gray-400 rounded-md leading-5
-                     text-gray-900 placeholder-gray-500 dark:text-gray-200 focus:border-white sm:text-sm"
-                    placeholder="Search"
-                    type="search"
-                    name="search"
-                    autocomplete="off"
-                  />
-                </div>
-              </div>
-            </div>
+            <SearchHeader />
             <div class="flex lg:hidden">
               <!-- Mobile menu button -->
               <DisclosureButton
@@ -77,20 +57,20 @@
           </div>
         </div>
 
-        <DisclosurePanel class="lg:hidden">
-          <div class="px-2 pt-2 pb-3 space-y-1">
+        <DisclosurePanel class="lg:hidden mt-16">
+          <div class="px-2 pt-2 pb-3 space-y-1 ">
             <DisclosureButton
               v-for="item in navigation"
               :key="item.name"
               as="a"
               :href="item.href"
               :class="[
-                item.current
+                currentRouteName === item.href
                   ? 'bg-gray-700 text-white'
                   : 'text-white hover:bg-gray-500 hover:bg-opacity-75',
                 'block rounded-md py-2 px-3 text-base font-medium',
               ]"
-              :aria-current="item.current ? 'page' : undefined"
+              :aria-current="currentRouteName === item.href ? 'page' : undefined"
             >
               {{ item.name }}
             </DisclosureButton>
@@ -99,7 +79,7 @@
       </Disclosure>
     </div>
 
-    <main class="min-w-screen min-h-screen bg-white dark:bg-gray-900">
+    <main class="min-w-screen min-h-screen bg-white dark:bg-gray-900 pt-16">
       <div class="mx-5">
         <slot> </slot>
       </div>
@@ -109,15 +89,17 @@
 
 <script setup lang="ts">
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
-import SearchIcon from "@heroicons/vue/24/solid/MagnifyingGlassIcon";
 import MenuIcon from "@heroicons/vue/24/outline/Bars3Icon";
 import XIcon from "@heroicons/vue/24/outline/XMarkIcon";
-import { ref } from "vue";
-import { RouterLink } from "vue-router";
+import SearchHeader from "@/components/SearchHeader.vue"
+import { computed, ref } from "vue";
+import { RouterLink, useRoute } from "vue-router";
 
 const navigation = ref([
-  { name: "Dashboard", href: "Home", current: true },
-  { name: "Cards", href: "Cards", current: false },
-  { name: "Settings", href: "Settings", current: false },
+  { name: "Dashboard", href: "Home" },
+  { name: "Cards", href: "Cards"},
+  { name: "Settings", href: "Settings" },
 ]);
+
+const currentRouteName = computed(() => useRoute().name);
 </script>

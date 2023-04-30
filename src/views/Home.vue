@@ -7,7 +7,7 @@
       >
         <div class="shadow border-b border-gray-200 sm:rounded-lg">
           <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
-            <thead class="sticky top-16 z-20">
+            <thead class="sticky top-16 z-10">
               <tr>
                 <th scope="col" 
                   class="sticky left-0 px-6 py-3 max-w-10 text-left text-xs font-medium bg-gray-200

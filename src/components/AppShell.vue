@@ -1,25 +1,25 @@
 <template>
   <div class="min-h-full">
-    <div class="bg-gray-600 pb-32">
+    <div class="pb-16 dark:bg-gray-800">
       <Disclosure
         as="nav"
-        class="bg-gray-500 border-b border-gray-300 border-opacity-25 lg:border-none"
+        class="bg-gray-500 dark:bg-gray-800 border-b border-gray-300 border-opacity-25 lg:border-none"
         v-slot="{ open }"
       >
         <div
-          class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 fixed left-0 top-0 z-20 w-full bg-gray-300"
+          class="w-full mx-auto px-2 sm:px-4 lg:px-8 fixed left-0 top-0 z-20 bg-gray-300 dark:bg-gray-700"
         >
           <div
             class="relative h-16 flex items-center justify-between lg:border-b lg:border-gray-400 lg:border-opacity-25"
           >
             <div class="px-2 flex items-center lg:px-0">
-              <div class="flex-shrink-0">
+              <RouterLink :to="{name: 'Home'}" class="flex-shrink-0">
                 <img
                   class="block h-8 w-10"
                   src="../../public/nanvani-logo.png"
                   alt="main logo"
                 />
-              </div>
+              </RouterLink>
               <div class="hidden lg:block lg:ml-10">
                 <div class="flex space-x-4">
                   <RouterLink
@@ -28,7 +28,7 @@
                     :to="{ name: item.href }"
                     :class="[
                       item.current
-                        ? 'bg-gray-700 text-white'
+                        ? 'bg-gray-700 dark:bg-gray-400 text-white'
                         : 'text-white hover:bg-gray-500 hover:bg-opacity-75',
                       'rounded-md py-2 px-3 text-sm font-medium',
                     ]"
@@ -42,7 +42,7 @@
             <div class="flex-1 px-2 flex justify-center lg:ml-6 lg:justify-end">
               <div class="max-w-lg w-full lg:max-w-xs">
                 <label for="search" class="sr-only">Search</label>
-                <div class="relative text-gray-400 focus-within:text-gray-600">
+                <div class="relative text-gray-400 dark:text-gray-300 focus-within:text-gray-600">
                   <div
                     class="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center"
                   >
@@ -50,7 +50,8 @@
                   </div>
                   <input
                     id="search"
-                    class="block w-full bg-white py-2 pl-10 pr-3 border border-transparent rounded-md leading-5 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-600 focus:ring-white focus:border-white sm:text-sm"
+                    class="block w-full bg-white dark:bg-gray-700 py-2 pl-10 pr-3 border border-transparent dark:border-gray-400 rounded-md leading-5
+                     text-gray-900 placeholder-gray-500 dark:text-gray-200 focus:border-white sm:text-sm"
                     placeholder="Search"
                     type="search"
                     name="search"
@@ -96,16 +97,9 @@
           </div>
         </DisclosurePanel>
       </Disclosure>
-      <header class="py-10 mt-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 class="text-3xl font-bold text-white">
-            <slot name="header"> Dashboard </slot>
-          </h1>
-        </div>
-      </header>
     </div>
 
-    <main class="w-full h-full">
+    <main class="w-full h-full bg-white dark:bg-gray-900">
       <div class="mx-5">
         <slot> </slot>
       </div>

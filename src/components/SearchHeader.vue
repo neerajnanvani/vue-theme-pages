@@ -8,30 +8,25 @@
         class="block w-full py-2 pl-4 pr-12 rounded-md text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent dark:text-gray-100 dark:bg-gray-700 border dark:border-gray-200"
         placeholder="Search"
         v-model="query"
-      
       />
     </div>
     <div
-      v-if="query && filteredPeople.length"
+      v-if="query && filteredData.length"
       class="absolute z-40 mt-1 w-full rounded-md bg-white dark:bg-gray-700 dark:border-gray-500 shadow-lg border border-gray-400"
     >
       <ul class="list-none py-1">
         <RouterLink
-        v-for="item in filteredPeople"
+          v-for="item in filteredData"
           :key="item.job"
-            :to="{name:'Cards', query: {id: item.id}}"
-            @click="query = ''"
+          :to="{ name: 'Cards', query: { id: item.id } }"
+          @click="query = ''"
         >
-        <li
-         
-          class="px-3 py-2 hover:bg-gray-100 border-b-2 border-b-slate-100 dark:border-b-slate-600 
-          dark:hover:bg-gray-400 dark:text-gray-200"
-        >
-        
+          <li
+            class="px-3 py-2 hover:bg-gray-100 border-b-2 border-b-slate-100 dark:border-b-slate-600 dark:hover:bg-gray-400 dark:text-gray-200"
+          >
             {{ item.job }}
-        
-        </li>
-      </RouterLink>
+          </li>
+        </RouterLink>
       </ul>
     </div>
   </div>
@@ -42,14 +37,18 @@ import { sampleData } from "../assets/sampleData";
 import { computed, ref } from "vue";
 import { RouterLink } from "vue-router";
 
-const data = sampleData;
+
+// query for search
 const query = ref("");
 
-const filteredPeople = computed(() =>
+/**
+ * Computed property get the filtered values according query
+ */
+const filteredData = computed(() =>
   query.value === ""
-    ? data
-    : data.filter((person) => {
-        return JSON.stringify(person)
+    ? sampleData
+    : sampleData.filter((data) => {
+        return JSON.stringify(data)
           .toLowerCase()
           .includes(query.value.toLowerCase());
       })

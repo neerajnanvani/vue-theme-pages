@@ -1,6 +1,5 @@
 <template>
   <AppShell :class="isDarkMode ? 'dark' : ''">
-    <template #header> Hello </template>
     <router-view></router-view>
   </AppShell>
 </template>
@@ -11,6 +10,8 @@ import { computed } from "vue";
 
 const store = useThemeStore();
 
-const isDarkMode = computed(()=> store.isDarkMode);
-
+/**
+ * Computed property to get the current state of dark mode
+ */
+const isDarkMode = computed(() => store.isDarkMode);
 </script>

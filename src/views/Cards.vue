@@ -63,16 +63,28 @@
 <script setup lang="ts">
 import { useRoute } from "vue-router";
 import { sampleData } from "../assets/sampleData";
-import { ref, computed, watch } from "vue";
+import { ref, computed } from "vue";
+
+// copy sample data to card data
 const cardData = ref([...sampleData]);
 
+// useRoute to get the query
 const route = useRoute();
+
+/**
+ * Function to remove the card from current view
+ * 
+ * @param {number} index - the index of card to be removed
+ */
 function removeData(index: number) {
   cardData.value.splice(index, 1);
 }
 
+/**
+ * Computed property to get the data id of card which needs to be highlight
+ */
 const highlightDataId = computed(() => {
-    const query = route.query;
+    const { query } = route;
     return query.id as unknown as number;
 })
 

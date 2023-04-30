@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-full">
-    <div class=" dark:bg-gray-800">
+    <div class="dark:bg-gray-800">
       <Popover
         as="nav"
         class="relative bg-gray-500 dark:bg-gray-800 border-b border-gray-300 border-opacity-25 lg:border-none"
@@ -13,10 +13,10 @@
             class="relative h-16 flex items-center justify-between lg:border-b lg:border-gray-400 lg:border-opacity-25"
           >
             <div class="px-2 flex items-center lg:px-0">
-              <RouterLink :to="{name: 'Home'}" class="flex-shrink-0">
+              <RouterLink :to="{ name: 'Home' }" class="flex-shrink-0">
                 <img
                   class="block h-8 w-10"
-                  src="../../public/nanvani-logo.png"
+                  src="/nanvani-logo.png"
                   alt="main logo"
                 />
               </RouterLink>
@@ -32,7 +32,9 @@
                         : 'text-white hover:bg-gray-500 hover:bg-opacity-75',
                       'rounded-md py-2 px-3 text-sm font-medium',
                     ]"
-                    :aria-current="currentRouteName === item.name ? 'page' : undefined"
+                    :aria-current="
+                      currentRouteName === item.name ? 'page' : undefined
+                    "
                   >
                     {{ item.name }}
                   </RouterLink>
@@ -57,22 +59,25 @@
           </div>
         </div>
 
-        <PopoverPanel class="lg:hidden mt-16 absolute z-40 bg-gray-700 w-full">
-          <div class="px-2 pt-2 pb-3 space-y-1 w-full">
-            <RouterLink  v-for="item in navigation"
+        <PopoverPanel class="lg:hidden mt-16 absolute z-40 bg-gray-300 dark:bg-gray-700 w-full">
+          <div class="px-2 pt-2  pb-3 space-y-1 w-full">
+            <RouterLink
+              v-for="item in navigation"
               :key="item.name"
               class="w-full"
-              :to="{name: item.href}"             
+              :to="{ name: item.href }"
+            >
+              <PopoverButton
+                :class="[
+                  currentRouteName === item.href
+                    ? 'bg-gray-500 text-white'
+                    : 'text-white hover:bg-gray-500 hover:bg-opacity-75',
+                  'w-full block rounded-md py-2 px-3 my-2 text-base font-medium',
+                ]"
               >
-            <PopoverButton :class="[
-                currentRouteName === item.href
-                  ? 'bg-gray-700 text-white'
-                  : 'text-white hover:bg-gray-500 hover:bg-opacity-75',
-                'w-full block rounded-md py-2 px-3 text-base font-medium',
-              ]" >
-              {{ item.name }}
-            </PopoverButton>
-          </RouterLink>
+                {{ item.name }}
+              </PopoverButton>
+            </RouterLink>
           </div>
         </PopoverPanel>
       </Popover>
@@ -87,18 +92,20 @@
 </template>
 
 <script setup lang="ts">
-import { Disclosure, DisclosureButton, DisclosurePanel, Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
+import { Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
 import MenuIcon from "@heroicons/vue/24/outline/Bars3Icon";
 import XIcon from "@heroicons/vue/24/outline/XMarkIcon";
-import SearchHeader from "@/components/SearchHeader.vue"
+import SearchHeader from "@/components/SearchHeader.vue";
 import { computed, ref } from "vue";
 import { RouterLink, useRoute } from "vue-router";
 
+// navigation links 
 const navigation = ref([
   { name: "Dashboard", href: "Home" },
-  { name: "Cards", href: "Cards"},
+  { name: "Cards", href: "Cards" },
   { name: "Settings", href: "Settings" },
 ]);
 
+// current route name to show current page link highlighted
 const currentRouteName = computed(() => useRoute().name);
 </script>

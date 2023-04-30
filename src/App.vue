@@ -13,7 +13,4 @@ const store = useThemeStore();
 
 const isDarkMode = computed(()=> store.isDarkMode);
 
-console.log(isDarkMode.value)
-
-
 </script>

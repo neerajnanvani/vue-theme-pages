@@ -37,6 +37,12 @@ import { sampleData } from "../assets/sampleData";
 import { computed, ref } from "vue";
 import { RouterLink } from "vue-router";
 
+defineProps({
+  text: {
+    type: string,
+    required: true,
+  },
+});
 
 // query for search
 const query = ref("");
